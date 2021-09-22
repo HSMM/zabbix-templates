@@ -338,6 +338,16 @@ pjsip.trunks.offline() {
   asteriskCmd "pjsip show endpoints" | grep "Contact:" | egrep -e "NonQual" | awk '{print $2}'| cut -d "/" -f1 | grep [A-Za-z] | wc -l
 }
 
+callbee.status() {
+cb=`asteriskCmd "manager show connected" | grep "89.108.65.246" | wc -l`
+if [ $cb = 0 ]
+then
+echo Down
+else
+echo Up
+fi
+}
+
 # execute the passed command
 #set -x
 $cmd $@
